@@ -1,0 +1,8 @@
+*.fasl
+*.fx64fsl
+*.fx32fsl
+*.lx64fsl
+*.lx32fsl
+*~
+\#*
+forex-data-format/*
