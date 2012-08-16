@@ -4,13 +4,6 @@
 (def-suite :my-utils-test-suite-math)
 (in-suite :my-utils-test-suite-math)
 
-
-;;
-(test test-mean ()
-      (is (= 1 (mean '(1))))
-      (is (= 3/2 (mean '(1 2))))
-      (is (= 2 (mean '(1 2 3)))))
-
 ;;
 (test test-weighted-mean ()
       (is (= 1 (weighted-mean '(1) '(3))))
@@ -24,26 +17,13 @@
       (is (equal '(2 . 4) (mode '(1 2 2 2 2 3 3 3))))
       (is (equal '(5 . 4) (mode '(1 2 2 3 3 3 5 5 5 5)))))
 
-
 ;;
-(test test-median ()
-      (is (= 1 (median '(1))))
-      (is (= 2 (median '(1 3))))
-      (is (= 2 (median '(1 3 2))))
-      (is (= 5/2 (median '(1 3 2 4)))))
-
 (test test-quartile ()
       (is (equal '(11) (quartile '(11))))
       (is (equal '(1 5) (quartile '(1 5))))
       (is (equal '(3) (quartile '(1 3 5))))
       (is (equal '(3 5) (quartile '(1 3 5 7))))
       (is (equal '(3 5 7) (quartile '(1 3 5 7 9)))))
-      
-;;
-(test test-standard-deviation ()
-      (is (= 0 (standard-deviation '(1))))
-      (is (= 0 (standard-deviation '(1 1))))
-      (is (= (sqrt 2) (standard-deviation '(1 3 3 5)))))
       
 ;;
 (test derivative ()

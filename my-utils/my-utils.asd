@@ -11,7 +11,6 @@
 (defsystem :my-utils
   :depends-on (:alexandria)
   :components ((:file "packages")
-	       (:file "macros" :depends-on ("packages"))
 	       (:file "common-utils" :depends-on ("packages"))
 	       (:file "math-utils" :depends-on ("packages"))
 	       (:file "grouping" :depends-on ("packages"))))	       

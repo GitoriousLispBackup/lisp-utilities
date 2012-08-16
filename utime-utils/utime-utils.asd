@@ -11,8 +11,8 @@
 (defsystem :utime-utils
   :depends-on (:my-utils :cl-ppcre)
   :components ((:file "packages")
-	       (:file "utime-utils" :depends-on ("packages"))
-	       (:file "utime-names" :depends-on ("packages"))))
+	       (:file "utime-names" :depends-on ("packages"))
+	       (:file "utime-utils" :depends-on ("packages" "utime-names"))))
 
 ;;
 (defsystem :utime-utils-tests

@@ -1,9 +1,5 @@
 (in-package :my-utils)
 
-;;
-(defun mean (li)
-  (assert li)
-  (/ (apply #'+ li) (length li)))
 
 ;;
 (defun weighted-mean (li weigths)
@@ -30,18 +26,6 @@
    #'>
    :key #'cdr))
 
-;; 
-(defun median (li)
-  (assert li)
-  (let* ((len  (length li))
-	 (half (truncate (/ len 2)))
-	 (li   (sort li #'<)))
-    (if (oddp len)
-	(elt li half)
-	(/ (+ (elt li half)
-	      (elt li (1- half))) 
-	   2))))
-
 ;;
 (defun q1 (li)
   (assert li)
@@ -61,13 +45,13 @@
     (remove-if (lambda (val) (or (< val q1) (> val q3))) li)))
       
 ;;
-(defun standard-deviation (li &optional (normalize nil) (sample nil))
-  (assert li)
-  (let ((l (length li)) 
-	(m (mean li)))
-    (/ (sqrt (/ (apply #'+ (mapcar #'(lambda (x) (expt (- m x) 2)) li))
-	      (if sample (1- l) l)))
-       (if normalize m 1))))
+;(defun standard-deviation (li &optional (normalize nil) (sample nil))
+;  (assert li)
+;  (let ((l (length li)) 
+;	(m (mean li)))
+;    (/ (sqrt (/ (apply #'+ (mapcar #'(lambda (x) (expt (- m x) 2)) li))
+;	      (if sample (1- l) l)))
+;       (if normalize m 1))))
 
 ;;
 (defun derivative (l)
