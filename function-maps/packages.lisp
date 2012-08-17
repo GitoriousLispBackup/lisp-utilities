@@ -10,6 +10,4 @@
    :compose-parallel
 
    ;; utils
-   :collect-listener
-   :collect-listener-instance
-   :print-listener))
+   :collect-listener)) 
