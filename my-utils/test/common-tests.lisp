@@ -44,4 +44,31 @@
 	(is (equal '(-1 11) (funcall r 11)))
 	(is (equal '(-1 11) (funcall r 10)))
 	(is (equal '(-1 11) (funcall r -1)))))
+
+;;
+(test range-listener-test-2 ()
+      (let ((r (range-listener :key #'car)))	
+	(multiple-value-bind (li change) (funcall r '(1 a 3))	  
+	  (is (equal li '((1 a 3) (1 a 3))))
+	  (is-true change))
+	
+	(multiple-value-bind (li change) (funcall r '(1 3 r))	  
+	  (is (equal li '((1 a 3) (1 a 3))))
+	  (is-true (not change)))
+
+	(multiple-value-bind (li change) (funcall r '(2 r d))	  
+	  (is (equal li '((1 a 3) (2 r d))))
+	  (is-true change))
+
+	(multiple-value-bind (li change) (funcall r '(0 3 e))	  
+	  (is (equal li '((2 r d) (0 3 e))))
+	  (is-true change))
+
+	(multiple-value-bind (li change) (funcall r '(-1 -11 -111))	  
+	  (is (equal li '((2 r d) (-1 -11 -111))))
+	  (is-true change))
+
+	(multiple-value-bind (li change) (funcall r '(10 11 100 9))
+	  (is (equal li '((-1 -11 -111) (10 11 100 9))))
+	  (is-true change))))
 	
