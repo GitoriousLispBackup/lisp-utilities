@@ -2,6 +2,7 @@
 
 ;;
 (defpackage :utime-utils
+  (:nicknames :ut)
   (:use :cl)
   (:import-from :my-utils :cyclic-range-2 :flatten :ensure-list-2)
   (:import-from :cl-ppcre :split)
@@ -40,6 +41,5 @@
    :first-monday-of-month
    :first-monday-of-year
 
-   :now
    :utime-generate
    :utime-merge))
