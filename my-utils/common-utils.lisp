@@ -16,9 +16,6 @@
      when started collect el into result
      when stopped do (return result)))
      
-	      
-      
-
 ;;
 (defun ensure-list-2 (li)
   (let ((l (ensure-list li)))
@@ -28,20 +25,27 @@
 
 ;;
 (defun range-listener (&key (key #'identity))
-  (let  (min max min-val max-val result)
-    (flet ((set-min (new-min)
-	     (setq min new-min min-val (funcall key new-min))
-	     (values (setq result (list max min)) t))
-	   (set-max (new-max)
-	     (setq max new-max max-val (funcall key new-max))
-	     (values (setq result (list min max)) t)))
+  (let  (min max min-val max-val result last-range)
     (lambda (el)
       (let ((val (funcall key el)))
-	(cond 
-	  ((not min) 
-	   (set-min el) (set-max el))
-	  ((< val min-val)
-	   (set-min el))
-	  ((> val max-val)
-	   (set-max el))
-	  (t (values result nil))))))))
+      (cond 
+	((not min) ;; initial state, no min or max
+	 (setq min el min-val val) 
+	 (setq max el max-val val)
+	 (values (setq result (list min max)) 
+		 (setq last-range 0)
+		 nil))
+		 
+	((< val min-val)
+	 (setq min el min-val val)
+	 (values (setq result (list max min)) 
+		 (setq last-range (- min-val max-val))
+		 t))
+
+	((> val max-val)
+	 (setq max el max-val val)
+	 (values (setq result (list min max)) 
+		 (setq last-range (- max-val min-val))
+		 t))
+	
+	(t  (values result last-range nil)))))))
